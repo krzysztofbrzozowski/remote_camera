@@ -29,7 +29,12 @@ from django.urls import path
 from django.contrib import admin
 from django.urls import path
 
-from base.views import start_stream, stop_stream
+from base.views import (
+    index,
+    start_stream,
+    stop_stream
+)
+
 
 def fake_view(*args, **kwargs):
     """ This view should never be called because the URL paths
@@ -39,6 +44,7 @@ def fake_view(*args, **kwargs):
 
 
 urlpatterns = [
+    path('', index, name='index'),
     path("admin/", admin.site.urls),
     path("start_stream", start_stream, name="start-stream"),
     path("stop_stream", stop_stream, name="stop-stream"),

@@ -3,8 +3,14 @@ from django.shortcuts import redirect, get_object_or_404
 from django.utils import timezone
 from django.views.decorators.http import require_POST
 from django.views.decorators.csrf import csrf_exempt
+from django.shortcuts import render
 
 from .models import Stream
+
+
+def index(request):
+    context = {}
+    return render(request, 'base/index_video_test.html', context)
 
 
 @require_POST
