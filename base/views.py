@@ -1,7 +1,7 @@
 from django.http import HttpResponse, HttpResponseForbidden
 from django.shortcuts import redirect, get_object_or_404
 from django.utils import timezone
-from django.views.decorators.http import require_POST
+from django.views.decorators.http import require_POST, require_GET
 from django.views.decorators.csrf import csrf_exempt
 from django.shortcuts import render
 
@@ -42,3 +42,11 @@ def stop_stream(request):
     """
     Stream.objects.filter(key=request.POST["name"]).update(started_at=None)
     return HttpResponse("OK")
+
+@require_GET
+def authorize_key(request):
+    if request.user.is_authenticated and request.user.is_active:
+        # Do other checks here like Pay-Per-View (or Pay-Per-Minute :-))
+        return HttpResponse("OK")
+
+    return HttpResponseForbidden("Not authorized")

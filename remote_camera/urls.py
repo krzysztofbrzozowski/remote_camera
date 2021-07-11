@@ -32,7 +32,8 @@ from django.urls import path
 from base.views import (
     index,
     start_stream,
-    stop_stream
+    stop_stream,
+    authorize_key
 )
 
 
@@ -48,5 +49,6 @@ urlpatterns = [
     path("admin/", admin.site.urls),
     path("start_stream", start_stream, name="start-stream"),
     path("stop_stream", stop_stream, name="stop-stream"),
+    path("authorize_key", authorize_key, name="authorize-key"),
     path("live/<username>/index.m3u8", fake_view, name="hls-url")
 ]
